@@ -1,6 +1,6 @@
 <?php
 
-	require "../../../Back-end/functions.php";
+	require "../../Back-end/autoload.php";
 
 	$Error = "";
 
@@ -21,7 +21,7 @@
 			$arr['password'] = $password;
 			$arr['email'] = $email;
 
-			$query = "select * from users where email = :email && password = :password limit 1";			
+			$query = "select * from gebruikers where email = :email && password = :password limit 1";			
 			$stm = $connection->prepare($query);
 			$check = $stm->execute($arr);
 
@@ -33,7 +33,7 @@
 					$data = $data[0];
 					$_SESSION['username'] = $data->username;
 					$_SESSION['url_address'] = $data->url_address;
-					header("Location: index.php");
+					header("Location: ../dashboard/index.php");
 					die;	
 				}
 			}
@@ -47,38 +47,6 @@
 <html>
 <head>
 	<title>login</title>
-
-
-	<style type="text/css">
-		
-		form {
-			margin: auto;
-			border: solid thin #aaa;
-			padding: 6px;
-			max-width: 200px;
-		}
-
-		#title {
-			background-color: blue;
-			padding: 1em;
-			text-align: center;
-			color: white;
-		}
-
-		#textbox {
-			border: solid thin #aaa;
-			margin-top: 4px;
-			width: 98%
-
-		}
-
-		#error {
-			color: red;
-		}
-
-	</style>
-
-
 </head>
 <body style="font-family: verdana">
 

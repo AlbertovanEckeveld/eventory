@@ -1,5 +1,7 @@
 <?php 
 
+
+
 function get_random_string($length)
 {
 
@@ -45,6 +47,7 @@ function check_login($connection)
 			}
 	}
 
-	header("Location: login.php");
+	header("Location: ../users/login.php");
 	die;
 }
+
