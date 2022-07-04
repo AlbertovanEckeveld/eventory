@@ -48,46 +48,46 @@
 
 			$arr['url_address'] = $url_address;
 			$arr['username'] = $username;
-//			$arr['password'] = $password;
+			$arr['password'] = $password;
 			$arr['email'] = $email;
 //			$arr['date'] = $date;
+
+			$query = "insert into gebruikers (url_address,username,password,email) values (:url_address,:username,:password,:email)";
+			$stm = $connection->prepare($query);
+			$stm->execute($arr);
 //
-//			$query = "insert into gebruikers (url_address,username,password,email,date) values (:url_address,:username,:password,:email,:date)";
-//			$stm = $connection->prepare($query);
-//			$stm->execute($arr);
+//			$msg = 'Your account has been made, <br /> please verify it by clicking the activation link that has been send to your email.';
+//
+//			print($msg);
+//
+//			$hash = md5( rand(0,1000) );
+//			$password = rand(1000,5000);
+//
+//			$query = "insert into gebruikers (url_address,username,password,email,hash) values (:url_address,:username,:password,:email,:hash)";
+//
+//			$to      = $email; // Send email to our user
+//			
+//			$subject = 'Signup | Verification'; // Give the email a subject 
+//			$message = '
+//			
+//			Thanks for signing up!
+//			Your account has been created, you can login with the following credentials after you have activated your account by pressing the url below.
+//			
+//			------------------------
+//			Username: '.$username.'
+//			Emai:	  '.$email.'
+//			Password: '.$password.'
+//			------------------------
+//			
+//			Please click this link to activate your account:
+//			http://www.albertove.nl/verify.php?email='.$email.'&hash='.$hash.'
+//			
+//			'; // Our message above including the link
+//								
+//			//$headers = 'From:noreply@albertove.nl' . "\r\n"; 
+//			//mail($to, $subject, $message, $headers); 
 
-			$msg = 'Your account has been made, <br /> please verify it by clicking the activation link that has been send to your email.';
-
-			print($msg);
-
-			$hash = md5( rand(0,1000) );
-			$password = rand(1000,5000);
-
-			$query = "insert into gebruikers (url_address,username,password,email,hash) values (:url_address,:username,:password,:email,:hash)";
-
-			$to      = $email; // Send email to our user
-			
-			$subject = 'Signup | Verification'; // Give the email a subject 
-			$message = '
-			
-			Thanks for signing up!
-			Your account has been created, you can login with the following credentials after you have activated your account by pressing the url below.
-			
-			------------------------
-			Username: '.$username.'
-			Emai:	  '.$email.'
-			Password: '.$password.'
-			------------------------
-			
-			Please click this link to activate your account:
-			http://www.albertove.nl/verify.php?email='.$email.'&hash='.$hash.'
-			
-			'; // Our message above including the link
-								
-			$headers = 'From:noreply@albertove.nl' . "\r\n"; 
-			mail($to, $subject, $message, $headers); 
-
-			//header("Location: login.php");
+			header("Location: ../../../Front-end/index.php");
 			die;
 		}
 
