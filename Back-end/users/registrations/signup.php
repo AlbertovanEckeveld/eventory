@@ -50,9 +50,9 @@
 			$arr['username'] = $username;
 			$arr['password'] = $password;
 			$arr['email'] = $email;
-//			$arr['date'] = $date;
+			$arr['date'] = $date;
 
-			$query = "insert into gebruikers (url_address,username,password,email) values (:url_address,:username,:password,:email)";
+			$query = "insert into gebruikers (url_address,username,password,email,date) values (:url_address,:username,:password,:email,:date)";
 			$stm = $connection->prepare($query);
 			$stm->execute($arr);
 //
@@ -86,7 +86,7 @@
 //								
 //			//$headers = 'From:noreply@albertove.nl' . "\r\n"; 
 //			//mail($to, $subject, $message, $headers); 
-
+//
 			header("Location: ../../../Front-end/index.php");
 			die;
 		}
