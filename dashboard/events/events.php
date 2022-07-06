@@ -33,8 +33,10 @@
 
 
       <?php
+
+require "../../Back-end/autoload.php";
 echo "<table style='border: solid 1px black;'>";
-echo "<tr><th>Event</th><th>Datum</th></tr>";
+echo "<tr><th>Event</th><th>Datum</th><th>Locatie</th></tr>";
 
 class TableRows extends RecursiveIteratorIterator {
   function __construct($it) {
@@ -54,26 +56,10 @@ class TableRows extends RecursiveIteratorIterator {
   }
 }
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "eventory";
+  $query = "SELECT naam, datum, locatie FROM events";
+  $stm = $connection->prepare($query);
+  $stm->execute($arr);
 
-try {
-  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $stmt = $conn->prepare("SELECT naam, datum FROM events");
-  $stmt->execute();
-
-  // set the resulting array to associative
-  $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-  foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
-    echo $v;
-  }
-} catch(PDOException $e) {
-  echo "Error: " . $e->getMessage();
-}
-$conn = null;
 echo "</table>";
 ?> 
 

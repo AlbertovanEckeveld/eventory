@@ -24,7 +24,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
 
       $dbservername = "localhost";
       $dbusername = "root";
-      $dbpassword = "";
+      $dbpassword = "Welkom012";
       $dbname = "eventory";
 
     $conn = new PDO("mysql:host=$dbservername;dbname=$dbname", $dbusername, $dbpassword);
@@ -271,7 +271,7 @@ class TableRows extends RecursiveIteratorIterator {
 
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "Welkom012";
 $dbname = "eventory";
 
 try {

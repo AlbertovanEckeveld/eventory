@@ -13,12 +13,12 @@
       </div>
     </div>
 
-    <div class="Sidebar">
+       <div class="Sidebar">
          <div class="navbar">
            <a href="../dashboard.php">Home</a>
-           <a href="../users/gebruikers.php">Users</a>
-           <a href="../events/events.php">Events</a>
-           <a href="javascript:void(0)">Inschrijvingen</a>
+           <a href="../users/gebruikers.php">Gebruikers</a>
+           <a href="javascript:void(0)">Events</a>
+           <a href="../inschrijvingen/inschrijvingen.php">Inschrijvingen</a>
 
          </div></div>
    <div class="Main">
@@ -30,9 +30,11 @@
        <div class="graph2">
        <img src="../assets/img/pie.png" /></div>
       </div>
+
+
       <?php
 echo "<table style='border: solid 1px black;'>";
-echo "<tr><th>Event</th><th>Datum</th></tr>";
+echo "<tr><th>Event</th><th>Datum</th><th>Locatie</th></tr>";
 
 class TableRows extends RecursiveIteratorIterator {
   function __construct($it) {
@@ -60,7 +62,7 @@ $dbname = "eventory";
 try {
   $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $stmt = $conn->prepare("SELECT voornaam, achternaam, studentnummer, email, mobielenummer, niveau, event, positie FROM sollicitaties");
+  $stmt = $conn->prepare("SELECT naam, datum, locatie FROM events");
   $stmt->execute();
 
   // set the resulting array to associative
@@ -74,6 +76,11 @@ try {
 $conn = null;
 echo "</table>";
 ?> 
+
+<div>
+  <a href="nieuw-event.php">Maak een nieuw account aan.</a> 
+</div>
+
          <div class="Graphgroup">
 
         <div class="graph3">
