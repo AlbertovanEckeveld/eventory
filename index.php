@@ -1,6 +1,6 @@
 <?php
 
-require "../Back-end/functions.php";
+require "Back-end/functions.php";
 
 if($_SERVER['REQUEST_METHOD'] == "POST")
 {
@@ -33,7 +33,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     $sql = "INSERT INTO `sollicitaties` (voornaam,achternaam,studentnummer,email,mobielenummer,niveau,event,positie) VALUES ('$voornaam','$achternaam','$studentnummer','$email','$mobielenummer','$niveau','$event','$positie')";
     // use exec() because no results are returned
     $conn->exec($sql);
-    echo "New record created successfully";
+    echo "Inschrijving verzonden!";
     } catch(PDOException $e) {
     echo $sql . "<br>" . $e->getMessage();
     }
@@ -52,8 +52,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
   <div class="container">
     <div class="Header">
       <div class="part1">
-      <img src="assets/images/hoi.jpg" />
-        Creative <br /> College
+      <img src="assets/img/hoi.jpg" />
         </div>
     </div>
     <div class="Main">
@@ -67,7 +66,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
 <!----- First Name ---------------------------------------------------------->
 <tr>
 <td>Voornaam</td>
-<td><input type="text" name="voornaam" maxlength="30"/>
+<td><input type="text" name="voornaam" maxlength="30" required />
 (Maximaal 30 letters)
 </td>
 </tr>
@@ -75,7 +74,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
 <!----- Last Name ---------------------------------------------------------->
 <tr>
 <td>Achternaam</td>
-<td><input type="text" name="achternaam" maxlength="30"/>
+<td><input type="text" name="achternaam" maxlength="30" required />
 (Maximaal 30 letters)
 </td>
 </tr>
@@ -185,7 +184,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
 <!-- studentnummer -->
 <tr>
 <td>Studentnummer</td>
-<td><input type="text" name="studentnummer" maxlength="6" />
+<td><input type="text" name="studentnummer" maxlength="6" required />
 (6 cijfers)
 </td>
 </tr>
@@ -193,14 +192,14 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
 <!----- Email Id ---------------------------------------------------------->
 <tr>
 <td>Email adres</td>
-<td><input type="text" name="email" maxlength="100" /></td>
+<td><input type="text" name="email" maxlength="100" required /></td>
 </tr>
 
 <!----- Mobile Number ---------------------------------------------------------->
 <tr>
 <td>Mobiele nummer</td>
 <td>
-<input type="text" name="mobielenummer" maxlength="10" />
+<input type="text" name="mobielenummer" maxlength="10" required />
 (10 cijferig nummer)
 </td>
 </tr>
@@ -209,9 +208,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
 <tr>
 <td>Geslacht</td>
 <td>
-Man <input type="radio" name="Gender" value="Male" />
-Vrouw <input type="radio" name="Gender" value="Female" />
-And <input type="radio" name="Gender" value="other" />
+Man <input type="radio" name="Gender" value="Male"  />
+Vrouw <input type="radio" name="Gender" value="Female"  />
+And <input type="radio" name="Gender" value="other"  />
 </td>
 </tr>
 
@@ -219,7 +218,7 @@ And <input type="radio" name="Gender" value="other" />
 <!----- City ---------------------------------------------------------->
 <tr>
 <td>Provincie</td>
-<td><input type="text" name="City" maxlength="30" />
+<td><input type="text" name="City" maxlength="30"  />
 (Maximaal 30 letters)
 </td>
 </tr>
@@ -228,7 +227,7 @@ And <input type="radio" name="Gender" value="other" />
 <!----- State ---------------------------------------------------------->
 <tr>
 <td>Stad / Dorp</td>
-<td><input type="text" name="State" maxlength="30" />
+<td><input type="text" name="State" maxlength="30"  />
 (Maximaal 30 letters)
 </td>
 </tr>
@@ -239,13 +238,13 @@ And <input type="radio" name="Gender" value="other" />
 <td>Wat is je Niveau?</td>
 <td>
 Niveau 1
-<input type="checkbox" name="niveau" value="niveau 1" />
+<input type="radio" name="niveau" value="niveau 1" />
 Niveau 2
-<input type="checkbox" name="niveau" value="niveau 2" />
+<input type="radio" name="niveau" value="niveau 2" />
 Niveau 3
-<input type="checkbox" name="niveau" value="niveau 3" />
+<input type="radio" name="niveau" value="niveau 3" />
 Niveau 4
-<input type="checkbox" name="niveau" value="niveau 4" />
+<input type="radio" name="niveau" value="niveau 4" />
 </br>
 </td>
 </tr>
@@ -255,7 +254,7 @@ Niveau 4
 
 <td>
 
-<select id="events" name="events">
+<select id="events" name="events" required>
 <option value="-1">Kies jou evenement:</option>
 <?php
 
@@ -304,18 +303,18 @@ $conn = null;
 
 <select id="Birthday_Month" name="Evenementen">
 <option value="-1">Kies jou locatie:</option>
-<option value="Concert">Zuid-Holland</option>
-<option value="Cabaret">Noord-Holland</option>
-<option value="Toneel">Zeeland</option>
-<option value="Open Avonden">Groningen</option>
-<option value="May">Drenthe</option>
-<option value="June">Friesland</option>
-<option value="July">Overijssel</option>
-<option value="August">Utrecht</option>
-<option value="August">Flevoland</option>
-<option value="August">Gelderland</option>
-<option value="August">Noord-Brabant</option>
-<option value="August">Limburg</option>
+<option value="Zuid-Holland">Zuid-Holland</option>
+<option value="Noord-Holland">Noord-Holland</option>
+<option value="Zeeland">Zeeland</option>
+<option value="Groningen">Groningen</option>
+<option value="Drenthe">Drenthe</option>
+<option value="Friesland">Friesland</option>
+<option value="Overijssel">Overijssel</option>
+<option value="Utrecht">Utrecht</option>
+<option value="Flevoland">Flevoland</option>
+<option value="Gelderland">Gelderland</option>
+<option value="Noord-Brabant">Noord-Brabant</option>
+<option value="Limburg">Limburg</option>
 </select>
 
 
@@ -328,7 +327,7 @@ $conn = null;
 
 <td>
 
-<select id="positie" name="positie">
+<select id="positie" name="positie" required>
   <option value="-1">Kies jou positie:</option>
   <option value="organisator">Organisator</option>
   <option value="leidinggevende">Leidinggevende</option>
@@ -359,7 +358,7 @@ $conn = null;
 </form>
 
 <div class="Footer">
-  <img src="assets/images/Knipsel.png" />
+  <img src="assets/img/Knipsel.png" />
 </div></div></div>
 </body>
 </html>

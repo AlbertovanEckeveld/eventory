@@ -1,6 +1,6 @@
 <?php
 
-	require "../Back-end/autoload.php";
+	require "Back-end/autoload.php";
 
 	$Error = "";
 
@@ -33,7 +33,7 @@
 					$data = $data[0];
 					$_SESSION['username'] = $data->username;
 					$_SESSION['url_address'] = $data->url_address;
-					header("Location: dashboard/index.php");
+					header("Location: dashboard/dashboard.php");
 					die;	
 				}
 			}

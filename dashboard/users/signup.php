@@ -1,10 +1,10 @@
 <?php
 
-	require "../../autoload.php";
+	require "../../Back-end/autoload.php";
 
 	$Error 		= "";
 	$email		= "";
-	$username 	= "";
+	$fullname 	= "";
 
 	if($_SERVER['REQUEST_METHOD'] == "POST")
 	{
@@ -16,13 +16,12 @@
 		}
 
 		$date = date("Y-m-d H:i:s");
-		$url_address = get_random_string(60);
 
 		$password = esc($_POST['password']);
 
-		$username = trim($_POST['username']);
-		$username = esc($username);
-		if(!preg_match("/^[a-zA-Z0-9]+$/", $username))
+		$fullname = trim($_POST['fullname']);
+		$fullname = esc($fullname);
+		if(!preg_match("/^[a-zA-Z0-9]+$/", $fullname))
 		{
 			$Error = "please enter a valid username";
 		}
@@ -30,7 +29,7 @@
 			$arr = false;
 			$arr['email'] = $email;
 
-			$query = "select * from gebruikers where email = :email limit 1";			
+			$query = "select * from `gebruikers_cms` where email = :email limit 1";			
 			$stm = $connection->prepare($query);
 			$check = $stm->execute($arr);
 
@@ -46,48 +45,16 @@
 		if(!$Error = "")
 		{
 
-			$arr['url_address'] = $url_address;
-			$arr['username'] = $username;
+			$arr['fullname'] = $fullname;
 			$arr['password'] = $password;
 			$arr['email'] = $email;
 			$arr['date'] = $date;
 
-			$query = "insert into gebruikers (url_address,username,password,email,date) values (:url_address,:username,:password,:email,:date)";
+			$query = "insert into `gebruikers_cms` (fullname,email,password,date) values (:fullname,:email,:password,:date)";
 			$stm = $connection->prepare($query);
 			$stm->execute($arr);
-//
-//			$msg = 'Your account has been made, <br /> please verify it by clicking the activation link that has been send to your email.';
-//
-//			print($msg);
-//
-//			$hash = md5( rand(0,1000) );
-//			$password = rand(1000,5000);
-//
-//			$query = "insert into gebruikers (url_address,username,password,email,hash) values (:url_address,:username,:password,:email,:hash)";
-//
-//			$to      = $email; // Send email to our user
-//			
-//			$subject = 'Signup | Verification'; // Give the email a subject 
-//			$message = '
-//			
-//			Thanks for signing up!
-//			Your account has been created, you can login with the following credentials after you have activated your account by pressing the url below.
-//			
-//			------------------------
-//			Username: '.$username.'
-//			Emai:	  '.$email.'
-//			Password: '.$password.'
-//			------------------------
-//			
-//			Please click this link to activate your account:
-//			http://www.albertove.nl/verify.php?email='.$email.'&hash='.$hash.'
-//			
-//			'; // Our message above including the link
-//								
-//			//$headers = 'From:noreply@albertove.nl' . "\r\n"; 
-//			//mail($to, $subject, $message, $headers); 
-//
-			header("Location: ../../../Front-end/index.php");
+
+			header("Location: gebruikers.php");
 			die;
 		}
 
@@ -103,8 +70,30 @@
 	<title>signup</title>
 </head>
 <body style="font-family: verdana">
+<html>
 
+<head>
+  <title>Eventory registratie formulier</title>
+  <link rel="stylesheet" href="../assets/css/styles-dashboard.css" />
+</head>
 
+<body>
+  <div class="container">
+    <div class="Header">
+      <div class="part1">
+        <img src="../assets/img/hoi.jpg" />
+      </div>
+    </div>
+
+    <div class="Sidebar">
+         <div class="navbar">
+           <a href="../dashboard.php">Home</a> 
+           <a href="gebruikers.php">Users</a>
+           <a href="../events/events.php">Events</a>
+           <a href="../inschrijvingen/inschrijvingen.php">Inschrijvingen</a>
+
+         </div></div>
+<div class="Main">
 	<form method="post">
 		<div id="error">
 			<?php
@@ -117,8 +106,8 @@
 			?>
 		</div>
 		<div id="title">Signup</div>
-		username
-		<input id="textbox" type="text" name="username" value="<?=$username?>" required> <br><br>
+		fullname
+		<input id="textbox" type="text" name="fullname" value="<?=$fullname?>" required> <br><br>
 		email
 		<input id="textbox" type="email" name="email" value="<?=$email?>" required> <br><br>
 		password
@@ -126,6 +115,10 @@
 
 		<input type="submit" value="Signup"><br><br>
 	</form>
+			</div>
+	<div class="footer">
+        <img src="../assets/img/Knipsel.png" />
+      </div>
 
 </body>
 </html>
