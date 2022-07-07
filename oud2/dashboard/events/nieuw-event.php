@@ -32,8 +32,6 @@
 
 	}
 
-
-
 ?>
 
 <!DOCTYPE html>
